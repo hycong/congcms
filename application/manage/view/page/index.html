@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/jquery.js"></script>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>单页名称</th>
+        <th>简介</th>
+        <th>修改时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{volist name="list" id="vo"}}
+    <tr>
+        <td>{{$vo.pageId}}</td>
+        <td>{{$vo.title}}</td>
+        <td>{{$vo.description}}</td>
+        <td>{{$vo.modifyTime|date="Y-m-d H:i"}}</td>
+        <td>
+            <a href="javascript:void(0);">查看页面</a>
+            <a href="{{:url('Page/modifyPage',['id'=>$vo.pageId])}}">修改单页</a>
+            <a href="javascript:void(0);" onclick="delete_page('{{$vo.pageId}}')">删除单页</a>
+        </td>
+    </tr>
+    {{/volist}}
+    </tbody>
+</table>
+<div class="pages">{{$pages|raw}}</div>
+</body>
+</html>
+
+<script>
+    function delete_page(id) {
+        $.post('{{:url("Page/removePage")}}',{id:id},function (json) {
+            window.location.reload();
+        },'json');
+    }
+</script>

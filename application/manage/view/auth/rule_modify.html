@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    {{include file="common/pagehead"}}
+    <title>权限管理 - 编辑权限节点</title>
+    <link rel="stylesheet" href="__MANAGE__/lib/layer/2.4/skin/layer.css">
+</head>
+<body>
+<article class="page-container">
+    <form action="{{:url('')}}" method="post" class="form form-horizontal" id="form-member-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>节 点 名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="title" class="input-text" id="title" type="text" value="{{$find.title}}" autocomplete="off" placeholder="请输入节点名" tabindex="1" datatype="*" nullmsg="请输入节点名">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>节点地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="name" class="input-text" id="name" type="text" value="{{$find.name}}" autocomplete="off" placeholder="节点地址" tabindex="2" datatype="*"  nullmsg="请输入节点地址"></div>
+        </div>
+        <div class="row cl">
+            <div class="form-label col-xs-4 col-sm-3">状态：</div>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="status" type="radio" id="status-1" value="1" {{if condition="$find.status == 1"}}checked{{/if}}>
+                    <label for="status-1">正常</label>
+                </div>
+                <div class="radio-box">
+                    <input name="status" type="radio" id="status-2" value="0" {{if condition="$find.status == '0'"}}checked{{/if}}>
+                    <label for="status-2">禁用</label>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__MANAGE__/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__MANAGE__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__MANAGE__/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="__MANAGE__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__MANAGE__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__MANAGE__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__MANAGE__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__MANAGE__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $('.skin-minimal input').iCheck({
+        checkboxClass: 'icheckbox-blue',
+        radioClass: 'iradio-blue',
+        increaseArea: '20%'
+    });
+    //表单验证
+    $("#form-member-add").validate({
+        rules:{
+            title:{
+                required:true,
+            },
+            name:{
+                required:true,
+            },
+        },
+        onkeyup:false,
+        focusCleanup:true,
+        success:"valid",
+        submitHandler:function(form){
+            $(form).ajaxSubmit({
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    if(data.code == 200){
+                        parent.layer.msg(data.msg,{time:2000},function () {
+                            parent.location.reload()
+                        });
+                    }else{
+                        parent.layer.msg(data.msg);
+                    }
+                },
+            });
+
+        }
+    });
+
+</script>
+</body>
+</html>

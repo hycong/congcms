@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+</head>
+<body>
+<form action="{{:url('Page/modifyPage')}}" method="post" onsubmit="return false;" id="addPageForm">
+    <input type="hidden" name="id" value="{{$info.pageId}}">
+    <div>
+        <span>标题</span>
+        <input type="text" name="title" value="{{$info.title}}" placeholder="请输入标题">
+    </div>
+    <div>
+        <span>描述</span>
+        <textarea type="text" name="description" value="{{$info.description}}" placeholder="请输入描述"></textarea>
+    </div>
+    <div>
+        <span>页面内容</span>
+        <textarea type="text" name="content" placeholder="content"> value="{{$info.pageId}}"</textarea>
+    </div>
+    <div>
+        <span>单页seo</span>
+        <input type="text" name="htmlSeo" value="{{$info.htmlSeo}}" placeholder="单页seo 如特殊需要才填写"/>
+    </div>
+    <div>
+        <span>单页描述</span>
+        <input type="text" name="htmlDescription" value="{{$info.htmlDescription}}" placeholder="单页描述 如特殊需要才填写"/>
+    </div>
+    <div>
+        <input type="button" onclick="submit_page()" value="提交">
+    </div>
+</form>
+</body>
+</html>
+<script>
+    function submit_page() {
+        let $_this = $('#addPageForm');
+        let data = $_this.serialize();
+        $.post($_this.attr('action'),data,function (json) {
+            if(json.code == 200){
+                window.location.href = json.url;
+            }else{
+                alert(json.msg);
+            }
+        },'json')
+    }
+</script>

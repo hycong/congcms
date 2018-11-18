@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{{:url('Column/addColumn')}}" autocomplete="off" method="post">
+    <input type="hidden" name="id" value="{{$info.menuId}}">
+    <div>
+        <span>栏目标题：</span>
+        <input type="text" name="title" value="{{$info.menuId}}" placeholder="请输入标题">
+    </div>
+    <div>
+        <span>栏目副标题：</span>
+        <input type="text" name="ftitle" value="{{$info.menuId}}" placeholder="请输入栏目副标题">
+    </div>
+    <div>
+        <span>栏目副标题：</span>
+        <select name="parentId">
+            <option value="0">请选择上级栏目</option>
+            {{volist name="$columnlist" id="vo"}}
+            <option value="{{$vo.menuId}}">{{$vo.title}}</option>
+            {{/volist}}
+        </select>
+    </div>
+    <div>
+        <span>页面类型：</span>
+        <select name="colType">
+            <option value="1">单页</option>
+            <option value="2">产品</option>
+            <option value="3">文章</option>
+        </select>
+    </div>
+    <div>
+        <span>页面地址：</span>
+        <input type="text" name="url" value="{{$info.menuId}}" placeholder="请输入页面地址">
+    </div>
+    <div>
+        <span>每页条数：</span>
+        <input type="text" name="pageNum" value="{{$info.menuId}}" placeholder="请输入每页条数">
+    </div>
+    <div>
+        <span>图片地址：</span>
+        <input type="text" name="imgUrl" value="{{$info.menuId}}" placeholder="请输入图片地址">
+    </div>
+    <div>
+        <span>列表页面名：</span>
+        <select name="pageName"></select>
+    </div>
+    <div>
+        <span>详情页面名：</span>
+        <select name="detailName"></select>
+    </div>
+    <div>
+        <span>描述：</span>
+        <textarea name="MenuDescription" placeholder="对本栏目的描述"> value="{{$info.menuId}}"</textarea>
+    </div>
+    <div>
+        <span>是否外连：</span>
+        <label><input type="radio" value="0" {{if condition="$info.menuId == '0'"}}checked{{/if}}>否</label>
+        <label><input type="radio" value="1" {{if condition="$info.menuId == '1'"}}checked{{/if}}>是</label>
+    </div>
+    <div>
+        <span>是否外连：</span>
+        <input type="text" name="linkUrl" value="{{$info.linkUrl}}" placeholder="请输入外连地址（isLink开启时有效）">
+    </div>
+    <div>
+        <span>目标窗口：</span>
+        <input type="text" name="target" value="{{$info.target|default='_self'}}" placeholder="请输入目标窗口">
+        <br>
+        如：_blank、_self、_parent、_top、指定名
+    </div>
+    <div>
+        <span>列表页图尺寸：</span>
+        <input type="text" name="initialPic[width]" value="{{$info.initialPic.width}}" value="200" placeholder="请输入列表页图尺寸宽">
+        <input type="text" name="initialPic[height]" value="{{$info.initialPic.height}}" value="200" placeholder="请输入列表页图尺寸高">
+    </div>
+    <div>
+        <span>特殊推广图尺寸：</span>
+        <input type="text" name="specialPic[width]" value="{{$info.specialPic.width}}" value="250" placeholder="请输入特殊推广图尺寸宽">
+        <input type="text" name="specialPic[height]" value="{{$info.specialPic.height}}" value="150" placeholder="请输入特殊推广图尺寸高">
+    </div>
+    <div>
+        <span>特殊推广图尺寸：</span>
+        <label><input type="radio" name="enabled" value="1" {{if condition="$info.enabled == '1'"}}checked{{/if}}> 开启</label>
+        <label><input type="radio" name="enabled" value="0" {{if condition="$info.enabled == '0'"}}checked{{/if}}> 隐藏</label>
+    </div>
+    <div>
+        <span>页面seo：</span>
+        <input type="text" name="htmlSeo" value="{{$info.htmlSeo}}" placeholder="页面seo">
+    </div>
+    <div>
+        <span>页面单独描述：</span>
+        <input type="text" name="htmlDescription" value="{{$info.htmlDescription}}" placeholder="页面单独描述">
+    </div>
+    <div>
+        <span>排序：</span>
+        <input type="text" name="sort" value="{{$info.sort}}" placeholder="排序" value="0">
+    </div>
+    <div>
+        <input type="submit" value="提交">
+    </div>
+</form>
+</body>
+</html>
