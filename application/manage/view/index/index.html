@@ -19,10 +19,10 @@
             <!--<img class="my-header-logo" src="" alt="logo">-->
             <div class="my-header-logo">后台模板 HTML</div>
         </a>
+
         <div class="my-header-btn">
             <button class="layui-btn layui-btn-small btn-nav"><i class="layui-icon">&#xe65f;</i></button>
         </div>
-
         <!-- 顶部左侧添加选项卡监听 -->
         <ul class="layui-nav" lay-filter="side-top-left">
             <!--<li class="layui-nav-item"><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>按钮</a></li>
@@ -101,7 +101,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <!--<iframe id="iframe" src="{{:url('welcome')}}" frameborder="0"></iframe>-->
+                    <!--<iframe id="iframe" src="{:url('welcome')}" frameborder="0"></iframe>-->
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@ layui.use(['layer','vip_nav'], function () {
     // 顶部左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]
     vipNav.top_left('__MANAGE__/json/nav_top_left.json','side-top-left',false);
     // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-    vipNav.main('{{:url("index/get_nav")}}','side-main',true);
+    vipNav.main('{:url("index/get_nav")}','side-main',true);
 
     // you code ...
 
